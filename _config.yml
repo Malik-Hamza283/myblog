@@ -1,0 +1,23 @@
+# Jekyll configuration file
+
+domain: "example.com"
+# Update with your actual domain
+
+baseurl: ""
+# The subpath of your site, e.g. /blog
+
+title: "My Blog"
+
+description: "A blog about various topics"
+
+theme: "minima"
+# Change the theme as needed
+
+# Build settings
+
+permalink: "pretty"
+
+author:
+  name: "Your Name"
+  email: "your_email@example.com"
+# Update with your actual name and email
