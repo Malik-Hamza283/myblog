@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Global Blog</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg: #f5f7fb;
+  --card: #ffffff;
+  --text: #1f2937;
+  --accent: #6366f1;
+  --muted: #6b7280;
+}
+
+body.dark {
+  --bg: #0f172a;
+  --card: #1e293b;
+  --text: #e5e7eb;
+  --muted: #9ca3af;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  transition: 0.3s;
+}
+
+/* NAVBAR */
+header {
+  position: sticky;
+  top: 0;
+  background: var(--card);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 40px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.05);
+  z-index: 1000;
+}
+
+header h1 {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+nav a {
+  margin-left: 20px;
+  text-decoration: none;
+  color: var(--text);
+  font-weight: 500;
+}
+
+.toggle {
+  background: var(--accent);
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+}
+
+/* HERO */
+.hero {
+  padding: 80px 40px;
+  text-align: center;
+}
+
+.hero h2 {
+  font-size: 42px;
+}
+
+.hero p {
+  color: var(--muted);
+  margin-top: 10px;
+}
+
+/* SEARCH */
+.search {
+  max-width: 500px;
+  margin: 30px auto;
+}
+
+.search input {
+  width: 100%;
+  padding: 14px;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  font-size: 16px;
+}
+
+/* LAYOUT */
+.container {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  gap: 30px;
+  padding: 40px;
+}
+
+/* POSTS */
+.post {
+  background: var(--card);
+  padding: 25px;
+  border-radius: 14px;
+  margin-bottom: 25px;
+  animation: fadeUp .6s ease;
+}
+
+.post h3 {
+  margin-bottom: 8px;
+}
+
+.post p {
+  color: var(--muted);
+}
+
+.actions {
+  display: flex;
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.actions button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  color: var(--accent);
+}
+
+/* SIDEBAR */
+.sidebar {
+  background: var(--card);
+  padding: 25px;
+  border-radius: 14px;
+  height: fit-content;
+}
+
+.sidebar h4 {
+  margin-bottom: 15px;
+}
+
+/* COMMENTS */
+.comments {
+  margin-top: 20px;
+}
+
+.comments input, .comments textarea {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+}
+
+.comments button {
+  margin-top: 10px;
+  background: var(--accent);
+  border: none;
+  color: white;
+  padding: 10px;
+  cursor: pointer;
+}
+
+/* FOOTER */
+footer {
+  text-align: center;
+  padding: 30px;
+  color: var(--muted);
+}
+
+/* ANIMATIONS */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media(max-width: 900px) {
+  .container {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>GlobalBlog</h1>
+  <nav>
+    <a href="#">Home</a>
+    <a href="#">Trending</a>
+    <a href="#">About</a>
+  </nav>
+  <button class="toggle" onclick="toggleMode()">🌙</button>
+</header>
+
+<section class="hero">
+  <h2>Write. Share. Inspire the World 🌍</h2>
+  <p>A modern blogging platform for global creators</p>
+</section>
+
+<div class="search">
+  <input type="text" placeholder="Search posts..." onkeyup="searchPosts(this.value)">
+</div>
+
+<div class="container">
+  <main id="posts">
+    <div class="post">
+      <h3>How Technology Is Changing the World</h3>
+      <p>Technology connects people, builds economies, and reshapes culture globally.</p>
+      <div class="actions">
+        <button onclick="likePost(this)">❤️ <span>0</span></button>
+        <button onclick="savePost()">🔖 Save</button>
+      </div>
+
+      <div class="comments">
+        <input placeholder="Your name" class="cname">
+        <textarea placeholder="Write a comment"></textarea>
+        <button onclick="addComment(this)">Comment</button>
+        <ul></ul>
+      </div>
+    </div>
+  </main>
+
+  <aside class="sidebar">
+    <h4>Why GlobalBlog?</h4>
+    <p>Fast, clean, responsive, and designed for worldwide creators.</p>
+    <h4>Topics</h4>
+    <p>#Technology<br>#Design<br>#Lifestyle<br>#Business</p>
+  </aside>
+</div>
+
+<footer>
+  © 2026 GlobalBlog • Designed for the world
+</footer>
+
+<script>
+/* DARK MODE */
+function toggleMode() {
+  document.body.classList.toggle("dark");
+  localStorage.setItem("mode", document.body.classList.contains("dark"));
+}
+
+if (localStorage.getItem("mode") === "true") {
+  document.body.classList.add("dark");
+}
+
+/* LIKE SYSTEM */
+function likePost(btn) {
+  let span = btn.querySelector("span");
+  span.textContent = parseInt(span.textContent) + 1;
+}
+
+/* SEARCH */
+function searchPosts(value) {
+  document.querySelectorAll(".post").forEach(post => {
+    post.style.display = post.innerText.toLowerCase().includes(value.toLowerCase()) ? "block" : "none";
+  });
+}
+
+/* COMMENTS */
+function addComment(btn) {
+  let post = btn.parentElement;
+  let name = post.querySelector(".cname").value;
+  let text = post.querySelector("textarea").value;
+  if(name && text) {
+    let li = document.createElement("li");
+    li.textContent = `${name}: ${text}`;
+    post.querySelector("ul").appendChild(li);
+    post.querySelector("textarea").value = "";
+  }
+}
+
+/* SAVE POST */
+function savePost() {
+  alert("Post saved! (Local feature demo)");
+}
+</script>
+
+</body>
+</html>
