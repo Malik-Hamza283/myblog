@@ -85,19 +85,36 @@ nav a {
   margin-top: 10px;
 }
 
-/* SEARCH */
-.search {
-  max-width: 500px;
-  margin: 30px auto;
+/* SEARCH SECTION */
+.search-section {
+  padding: 30px 40px;
+  background: var(--card);
+  border-radius: 14px;
+  max-width: 600px;
+  margin: 20px auto;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 5px 15px rgba(0,0,0,.05);
 }
 
-.search input {
-  width: 100%;
-  padding: 14px;
+.search-section input {
+  flex: 1;
+  padding: 12px 14px;
   border-radius: 8px;
-  border: none;
-  outline: none;
+  border: 1px solid #ccc;
   font-size: 16px;
+  outline: none;
+}
+
+.search-section button {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  padding: 12px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 18px;
 }
 
 /* LAYOUT */
@@ -273,9 +290,11 @@ footer {
   <p>A modern blogging platform for global creators</p>
 </section>
 
-<div class="search">
+<!-- SEARCH SECTION -->
+<section class="search-section">
   <input type="text" placeholder="Search posts..." onkeyup="searchPosts(this.value)">
-</div>
+  <button>🔍</button>
+</section>
 
 <div class="container">
   <main id="posts">
@@ -388,15 +407,8 @@ function setCookieConsent(consent) {
 }
 
 function handleCookies(consent) {
-  // Example: Only load non-essential scripts if consent is given
-  if(consent.analytics) {
-    console.log("Analytics scripts can be loaded now");
-    // loadAnalyticsScript();
-  }
-  if(consent.marketing) {
-    console.log("Marketing scripts can be loaded now");
-    // loadMarketingScript();
-  }
+  if(consent.analytics) console.log("Analytics scripts can be loaded now");
+  if(consent.marketing) console.log("Marketing scripts can be loaded now");
 }
 
 acceptAllBtn.onclick = () => setCookieConsent({essential:true, analytics:true, marketing:true});
