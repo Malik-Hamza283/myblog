@@ -193,7 +193,7 @@ footer {
 }
 
 #privacy-modal .modal-content {
-  background: white;
+  background: var(--card);
   padding: 30px;
   max-width: 500px;
   text-align: center;
@@ -209,14 +209,35 @@ footer {
   margin-bottom: 20px;
 }
 
+#privacy-modal .modal-buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
 #privacy-modal button {
-  padding: 10px 20px;
+  padding: 10px 15px;
   background: var(--accent);
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   font-weight: bold;
+  flex: 1;
+}
+
+#privacy-modal button:hover {
+  opacity: 0.9;
+}
+
+#preferences {
+  display:none;
+  text-align:left;
+  margin-top:20px;
+}
+
+#preferences input {
+  margin-right: 8px;
 }
 
 /* ANIMATIONS */
@@ -291,8 +312,20 @@ footer {
 <div id="privacy-modal">
   <div class="modal-content">
     <h2>Privacy Notice</h2>
-    <p>We use cookies to improve your experience. By using this site, you agree to our <a href="privacy.html" style="color:#4CAF50;">Privacy Policy</a>.</p>
-    <button id="accept-modal">I Understand</button>
+    <p>We use cookies to improve your experience. You can accept all, decline all, or manage your preferences. Read our <a href="privacy.html" style="color:#4CAF50;">Privacy Policy</a>.</p>
+    
+    <div class="modal-buttons">
+      <button id="accept-all">Accept All</button>
+      <button id="decline-all">Decline All</button>
+      <button id="manage-preferences">Manage Preferences</button>
+    </div>
+
+    <div id="preferences">
+      <label><input type="checkbox" id="essential" checked disabled> Essential Cookies (Required)</label><br>
+      <label><input type="checkbox" id="analytics"> Analytics Cookies</label><br>
+      <label><input type="checkbox" id="marketing"> Marketing Cookies</label><br>
+      <button id="save-preferences" style="margin-top:10px;">Save Preferences</button>
+    </div>
   </div>
 </div>
 
@@ -323,13 +356,15 @@ function searchPosts(value) {
 /* COMMENTS */
 function addComment(btn) {
   let post = btn.parentElement;
-  let name = post.querySelector(".cname").value;
-  let text = post.querySelector("textarea").value;
+  let name = post.querySelector(".cname").value.trim();
+  let text = post.querySelector("textarea").value.trim();
   if(name && text) {
     let li = document.createElement("li");
     li.textContent = `${name}: ${text}`;
     post.querySelector("ul").appendChild(li);
     post.querySelector("textarea").value = "";
+  } else {
+    alert("Please enter your name and comment.");
   }
 }
 
@@ -338,18 +373,51 @@ function savePost() {
   alert("Post saved! (Local feature demo)");
 }
 
-/* PRIVACY MODAL LOGIC */
+/* COOKIE CONSENT LOGIC */
 const modal = document.getElementById('privacy-modal');
-const acceptBtn = document.getElementById('accept-modal');
+const acceptAllBtn = document.getElementById('accept-all');
+const declineAllBtn = document.getElementById('decline-all');
+const manageBtn = document.getElementById('manage-preferences');
+const preferencesDiv = document.getElementById('preferences');
+const savePrefBtn = document.getElementById('save-preferences');
 
-acceptBtn.onclick = () => {
+function setCookieConsent(consent) {
+  localStorage.setItem('cookieConsent', JSON.stringify(consent));
   modal.style.display = 'none';
-  localStorage.setItem('privacyAccepted', 'true');
+  handleCookies(consent);
+}
+
+function handleCookies(consent) {
+  // Example: Only load non-essential scripts if consent is given
+  if(consent.analytics) {
+    console.log("Analytics scripts can be loaded now");
+    // loadAnalyticsScript();
+  }
+  if(consent.marketing) {
+    console.log("Marketing scripts can be loaded now");
+    // loadMarketingScript();
+  }
+}
+
+acceptAllBtn.onclick = () => setCookieConsent({essential:true, analytics:true, marketing:true});
+declineAllBtn.onclick = () => setCookieConsent({essential:true, analytics:false, marketing:false});
+manageBtn.onclick = () => preferencesDiv.style.display = 'block';
+savePrefBtn.onclick = () => {
+  const consent = {
+    essential: true,
+    analytics: document.getElementById('analytics').checked,
+    marketing: document.getElementById('marketing').checked
+  };
+  setCookieConsent(consent);
 };
 
 window.onload = () => {
-  if(localStorage.getItem('privacyAccepted') === 'true') {
+  const storedConsent = JSON.parse(localStorage.getItem('cookieConsent'));
+  if(storedConsent) {
     modal.style.display = 'none';
+    handleCookies(storedConsent);
+  } else {
+    modal.style.display = 'flex';
   }
 };
 </script>
