@@ -178,16 +178,51 @@ footer {
   color: var(--muted);
 }
 
+/* PRIVACY MODAL */
+#privacy-modal {
+  position: fixed;
+  top:0;
+  left:0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+#privacy-modal .modal-content {
+  background: white;
+  padding: 30px;
+  max-width: 500px;
+  text-align: center;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.3);
+}
+
+#privacy-modal h2 {
+  margin-bottom: 15px;
+}
+
+#privacy-modal p {
+  margin-bottom: 20px;
+}
+
+#privacy-modal button {
+  padding: 10px 20px;
+  background: var(--accent);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
 /* ANIMATIONS */
 @keyframes fadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from {opacity:0; transform:translateY(30px);}
+  to {opacity:1; transform:translateY(0);}
 }
 
 @media(max-width: 900px) {
@@ -202,14 +237,13 @@ footer {
 
 <header>
   <h1>GlobalBlog</h1>
- <nav>
-  <a href="index.html">Home</a>
-  <a href="#">Trending</a>
-  <a href="about.html">About</a>
-  <a href="contact.html">Contact</a>
-  <a href="privacy.html">Privacy</a>
-</nav>
-
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="#">Trending</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+    <a href="privacy.html">Privacy</a>
+  </nav>
   <button class="toggle" onclick="toggleMode()">🌙</button>
 </header>
 
@@ -250,8 +284,17 @@ footer {
 </div>
 
 <footer>
-  © 2026 GlobalBlog • Designed for the world
+  © 2026 GlobalBlog • Designed for the world • <a href="privacy.html">Privacy Policy</a>
 </footer>
+
+<!-- PRIVACY MODAL -->
+<div id="privacy-modal">
+  <div class="modal-content">
+    <h2>Privacy Notice</h2>
+    <p>We use cookies to improve your experience. By using this site, you agree to our <a href="privacy.html" style="color:#4CAF50;">Privacy Policy</a>.</p>
+    <button id="accept-modal">I Understand</button>
+  </div>
+</div>
 
 <script>
 /* DARK MODE */
@@ -294,6 +337,21 @@ function addComment(btn) {
 function savePost() {
   alert("Post saved! (Local feature demo)");
 }
+
+/* PRIVACY MODAL LOGIC */
+const modal = document.getElementById('privacy-modal');
+const acceptBtn = document.getElementById('accept-modal');
+
+acceptBtn.onclick = () => {
+  modal.style.display = 'none';
+  localStorage.setItem('privacyAccepted', 'true');
+};
+
+window.onload = () => {
+  if(localStorage.getItem('privacyAccepted') === 'true') {
+    modal.style.display = 'none';
+  }
+};
 </script>
 
 </body>
