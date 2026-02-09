@@ -4,10 +4,231 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Contact - GlobalBlog</title>
+
+  <!-- Font Awesome -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+  />
+
+  <style>
+    body {
+      margin: 0;
+      font-family: "Helvetica Neue", "Segoe UI", sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #2b2b2b;
+
+      /* Luxury layered background */
+      background:
+        radial-gradient(circle at 15% 20%, rgba(184, 155, 94, 0.25), transparent 40%),
+        radial-gradient(circle at 85% 80%, rgba(0, 0, 0, 0.15), transparent 45%),
+        linear-gradient(135deg, #f7f2ea, #e8dfd1);
+    }
+
+    /* Soft floating shapes */
+    body::before,
+    body::after {
+      content: "";
+      position: absolute;
+      width: 420px;
+      height: 420px;
+      border-radius: 50%;
+      filter: blur(90px);
+      z-index: 0;
+    }
+
+    body::before {
+      background: rgba(184, 155, 94, 0.35);
+      top: -120px;
+      left: -120px;
+    }
+
+    body::after {
+      background: rgba(0, 0, 0, 0.25);
+      bottom: -140px;
+      right: -140px;
+    }
+
+    .contact-card {
+      position: relative;
+      z-index: 1;
+      background: linear-gradient(
+        145deg,
+        rgba(255, 255, 255, 0.88),
+        rgba(245, 238, 228, 0.88)
+      );
+      border-radius: 26px;
+      padding: 52px;
+      max-width: 480px;
+      width: 100%;
+      box-shadow: 0 45px 90px rgba(0, 0, 0, 0.18);
+      border: 1px solid rgba(0, 0, 0, 0.06);
+    }
+
+    h1 {
+      font-size: 38px;
+      margin-bottom: 14px;
+      font-weight: 600;
+      letter-spacing: 0.6px;
+      background: linear-gradient(90deg, #111, #b89b5e);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    p {
+      color: #555;
+      margin-bottom: 36px;
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    .form-group {
+      margin-bottom: 22px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 12px;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: #6b6b6b;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      padding: 15px;
+      border-radius: 14px;
+      border: 1px solid rgba(0, 0, 0, 0.18);
+      background: rgba(255, 255, 255, 0.95);
+      font-size: 14px;
+      outline: none;
+      transition: border 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    input:focus,
+    textarea:focus {
+      border-color: #b89b5e;
+      box-shadow: 0 0 0 4px rgba(184, 155, 94, 0.22);
+    }
+
+    textarea {
+      resize: none;
+    }
+
+    .send-btn {
+      width: 100%;
+      margin-top: 22px;
+      padding: 16px;
+      background: linear-gradient(135deg, #111, #b89b5e);
+      color: #ffffff;
+      border: none;
+      border-radius: 45px;
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: 0.6px;
+      cursor: pointer;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .send-btn i {
+      margin-right: 8px;
+    }
+
+    .send-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 22px 45px rgba(0, 0, 0, 0.28);
+    }
+
+    .contact-info {
+      margin-top: 42px;
+      font-size: 14px;
+      color: #444;
+      text-align: center;
+    }
+
+    .contact-info i {
+      color: #b89b5e;
+      margin-right: 6px;
+    }
+
+    .contact-info a {
+      color: #111;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .contact-info a:hover {
+      color: #b89b5e;
+    }
+
+    .back-home {
+      display: block;
+      margin-top: 30px;
+      text-align: center;
+      font-size: 14px;
+      text-decoration: none;
+      color: #666;
+      letter-spacing: 0.4px;
+    }
+
+    .back-home i {
+      margin-right: 6px;
+    }
+
+    .back-home:hover {
+      color: #111;
+    }
+  </style>
 </head>
 <body>
-  <h1>Contact</h1>
-  <p>Contact me: malikhamza3566@gmail.com</p>
-  <a href="index.html">Back to Home</a>
+
+  <div class="contact-card">
+    <h1>Contact Me</h1>
+    <p>
+      For collaborations, premium inquiries, or thoughtful conversations —
+      I’d love to hear from you.
+    </p>
+
+    <form action="mailto:malikhamza3566@gmail.com" method="post" enctype="text/plain">
+      <div class="form-group">
+        <label>Full Name</label>
+        <input type="text" name="Name" required>
+      </div>
+
+      <div class="form-group">
+        <label>Email Address</label>
+        <input type="email" name="Email" required>
+      </div>
+
+      <div class="form-group">
+        <label>Your Message</label>
+        <textarea name="Message" rows="4" required></textarea>
+      </div>
+
+      <button type="submit" class="send-btn">
+        <i class="fas fa-paper-plane"></i> Send Message
+      </button>
+    </form>
+
+    <div class="contact-info">
+      <p>
+        <i class="fas fa-envelope"></i>
+        For any query, contact at
+        <a href="mailto:malikhamza3566@gmail.com">
+          malikhamza3566@gmail.com
+        </a>
+      </p>
+    </div>
+
+    <a href="index.html" class="back-home">
+      <i class="fas fa-arrow-left"></i> Back to Home
+    </a>
+  </div>
+
 </body>
 </html>
