@@ -34,6 +34,7 @@ body {
   background: var(--bg);
   color: var(--text);
   transition: 0.3s;
+  padding-bottom: 50px;
 }
 
 /* NAVBAR */
@@ -78,11 +79,15 @@ nav a {
 
 .hero h2 {
   font-size: 42px;
+  margin-bottom: 20px;
 }
 
 .hero p {
   color: var(--muted);
   margin-top: 10px;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* SEARCH SECTION */
@@ -128,24 +133,63 @@ nav a {
 /* POSTS */
 .post {
   background: var(--card);
-  padding: 25px;
+  padding: 30px;
   border-radius: 14px;
-  margin-bottom: 25px;
+  margin-bottom: 30px;
   animation: fadeUp .6s ease;
+  box-shadow: 0 5px 15px rgba(0,0,0,.05);
 }
 
 .post h3 {
-  margin-bottom: 8px;
+  margin-bottom: 15px;
+  font-size: 24px;
+  color: var(--accent);
 }
 
-.post p {
+.post-subtitle {
   color: var(--muted);
+  font-size: 14px;
+  margin-bottom: 20px;
+  font-style: italic;
+}
+
+.post-content {
+  margin-bottom: 25px;
+}
+
+.post-section {
+  margin-bottom: 20px;
+}
+
+.post-section h4 {
+  color: var(--text);
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+
+.post-section p {
+  color: var(--muted);
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
+.post-section ul {
+  margin-left: 20px;
+  margin-bottom: 15px;
+}
+
+.post-section li {
+  color: var(--muted);
+  margin-bottom: 8px;
+  line-height: 1.5;
 }
 
 .actions {
   display: flex;
   gap: 15px;
-  margin-top: 15px;
+  margin-top: 25px;
+  padding-top: 20px;
+  border-top: 1px solid #eee;
 }
 
 .actions button {
@@ -154,6 +198,13 @@ nav a {
   cursor: pointer;
   font-size: 16px;
   color: var(--accent);
+  padding: 8px 15px;
+  border-radius: 6px;
+  transition: 0.2s;
+}
+
+.actions button:hover {
+  background: rgba(99, 102, 241, 0.1);
 }
 
 /* SIDEBAR */
@@ -162,21 +213,46 @@ nav a {
   padding: 25px;
   border-radius: 14px;
   height: fit-content;
+  position: sticky;
+  top: 100px;
 }
 
 .sidebar h4 {
   margin-bottom: 15px;
+  color: var(--accent);
+}
+
+.sidebar p {
+  color: var(--muted);
+  margin-bottom: 20px;
+  line-height: 1.6;
 }
 
 /* COMMENTS */
 .comments {
-  margin-top: 20px;
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid #eee;
+}
+
+.comment-input {
+  margin-bottom: 20px;
 }
 
 .comments input, .comments textarea {
   width: 100%;
-  padding: 10px;
+  padding: 12px;
   margin-top: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 14px;
+  background: var(--card);
+  color: var(--text);
+}
+
+.comments textarea {
+  min-height: 100px;
+  resize: vertical;
 }
 
 .comments button {
@@ -184,8 +260,39 @@ nav a {
   background: var(--accent);
   border: none;
   color: white;
-  padding: 10px;
+  padding: 12px 24px;
+  border-radius: 8px;
   cursor: pointer;
+  font-weight: 500;
+  transition: 0.2s;
+}
+
+.comments button:hover {
+  opacity: 0.9;
+}
+
+.comment-list {
+  list-style: none;
+  margin-top: 20px;
+}
+
+.comment-list li {
+  background: rgba(99, 102, 241, 0.05);
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  border-left: 3px solid var(--accent);
+}
+
+.comment-author {
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 5px;
+}
+
+.comment-text {
+  color: var(--muted);
+  line-height: 1.5;
 }
 
 /* FOOTER */
@@ -193,6 +300,8 @@ footer {
   text-align: center;
   padding: 30px;
   color: var(--muted);
+  margin-top: 50px;
+  border-top: 1px solid #eee;
 }
 
 /* PRIVACY MODAL */
@@ -224,6 +333,7 @@ footer {
 
 #privacy-modal p {
   margin-bottom: 20px;
+  color: var(--muted);
 }
 
 #privacy-modal .modal-buttons {
@@ -267,6 +377,39 @@ footer {
   .container {
     grid-template-columns: 1fr;
   }
+  
+  .hero h2 {
+    font-size: 32px;
+  }
+  
+  .post {
+    padding: 20px;
+  }
+}
+
+@media(max-width: 600px) {
+  header {
+    flex-direction: column;
+    gap: 15px;
+    padding: 15px 20px;
+  }
+  
+  nav a {
+    margin: 0 10px;
+  }
+  
+  .hero {
+    padding: 50px 20px;
+  }
+  
+  .container {
+    padding: 20px;
+  }
+  
+  .search-section {
+    padding: 20px;
+    margin: 20px;
+  }
 }
 </style>
 </head>
@@ -298,33 +441,416 @@ footer {
 
 <div class="container">
   <main id="posts">
+    
+    <!-- POST 1: AI Beyond Basics -->
     <div class="post">
-      <h3>How Technology Is Changing the World</h3>
-      <p>Technology connects people, builds economies, and reshapes culture globally.</p>
+      <h3>AI Beyond Basics: Real-World Use Cases & Ethical Impact</h3>
+      <div class="post-subtitle">Artificial Intelligence (AI) has transformed from a futuristic concept into an integral part of our daily lives.</div>
+      
+      <div class="post-content">
+        <div class="post-section">
+          <h4>AI in Everyday Life</h4>
+          <p>AI has permeated our everyday experiences, often in ways that go unnoticed. Recommendation engines on Netflix, YouTube, or Spotify use AI to suggest content tailored to individual preferences. Social media platforms employ AI algorithms to determine which posts, ads, or videos appear in users' feeds, optimizing for engagement. Even our emails are filtered for spam and categorized by AI systems.</p>
+          <p>Moreover, AI-powered personal assistants are no longer limited to simple tasks. Modern AI can schedule meetings, generate reminders, and even analyze user behavior to anticipate needs. Smart home devices like thermostats, security systems, and lighting use AI to learn routines and optimize energy consumption, making homes more efficient and comfortable.</p>
+        </div>
+        
+        <div class="post-section">
+          <h4>Healthcare Innovations</h4>
+          <p>AI's impact on healthcare is one of its most transformative applications. Predictive analytics can identify health risks before they become critical. For instance, AI algorithms can analyze medical imaging to detect early signs of diseases such as cancer, often more accurately than human specialists. AI is also being used in drug discovery, significantly reducing the time and cost required to develop new treatments.</p>
+          <p>Wearable devices powered by AI continuously monitor vital signs, alerting users and healthcare providers to irregularities in real time. In hospitals, AI assists in operational management, predicting patient admissions and optimizing resource allocation. These advancements improve patient outcomes while making healthcare systems more efficient.</p>
+        </div>
+        
+        <div class="post-section">
+          <h4>AI in Creativity and Entertainment</h4>
+          <p>One of the most exciting areas for AI is creativity. AI-generated music, art, and writing are challenging traditional notions of authorship and creativity. For example, AI programs can compose symphonies, design fashion collections, or even generate entire articles. Filmmakers and game developers are using AI to create realistic graphics, immersive experiences, and interactive narratives.</p>
+          <p>While some critics fear that AI may replace human creators, others see it as a collaborative tool. Artists can use AI to generate ideas, refine techniques, or experiment with styles that would be difficult or impossible to achieve manually. AI in creativity opens new avenues for innovation while enhancing human potential.</p>
+        </div>
+        
+        <div class="post-section">
+          <h4>Ethical Considerations</h4>
+          <p>With great power comes great responsibility, and AI is no exception. Ethical considerations in AI are a growing concern, particularly regarding bias, privacy, and job displacement. AI systems are only as unbiased as the data they are trained on, which can perpetuate societal inequalities if not carefully managed. For example, AI in hiring or law enforcement can unintentionally favor certain groups, leading to unfair outcomes.</p>
+          <p>Privacy is another critical issue. AI systems often rely on massive amounts of personal data to function effectively. Without robust safeguards, this can lead to misuse or unauthorized access to sensitive information. Additionally, as AI takes on more tasks, there is legitimate concern over the displacement of jobs, particularly in areas like manufacturing, customer service, and even knowledge work.</p>
+          <p>To mitigate these risks, experts advocate for transparent AI systems, strict data privacy regulations, and policies that prepare the workforce for AI-driven changes. Ethical AI isn't just a moral imperative—it's essential for ensuring public trust and sustainable adoption.</p>
+        </div>
+        
+        <div class="post-section">
+          <h4>The Future of AI</h4>
+          <p>Looking forward, AI's potential seems limitless. In governance, AI can help policymakers model economic outcomes, optimize public services, and detect fraud. In sustainability, AI can analyze environmental data to predict climate trends, manage resources, and support conservation efforts. AI also promises to enhance personal decision-making, from financial planning to personalized learning paths.</p>
+          <p>However, realizing AI's potential requires careful balancing. Innovation must be paired with ethics, transparency, and inclusivity. AI that empowers rather than exploits will define the next decade of technological progress.</p>
+        </div>
+        
+        <div class="post-section">
+          <h4>Conclusion</h4>
+          <p>AI is no longer a futuristic idea—it is an active force shaping every aspect of modern life. From everyday conveniences to groundbreaking innovations in healthcare and creativity, its influence is undeniable. Yet with these advancements come ethical responsibilities that cannot be ignored. By understanding the practical applications and ethical implications of AI, individuals and organizations can harness its power responsibly and effectively.</p>
+        </div>
+      </div>
+      
       <div class="actions">
         <button onclick="likePost(this)">❤️ <span>0</span></button>
         <button onclick="savePost()">🔖 Save</button>
+        <button onclick="sharePost(this)">📤 Share</button>
       </div>
 
       <div class="comments">
-        <input placeholder="Your name" class="cname">
-        <textarea placeholder="Write a comment"></textarea>
-        <button onclick="addComment(this)">Comment</button>
-        <ul></ul>
+        <div class="comment-input">
+          <input placeholder="Your name" class="cname">
+          <textarea placeholder="Write a comment"></textarea>
+          <button onclick="addComment(this)">Add Comment</button>
+        </div>
+        <ul class="comment-list"></ul>
       </div>
     </div>
+    
+    <!-- POST 2: Authenticity & Social Media -->
+    <div class="post">
+      <h3>Authenticity & Human-Centric Social Media Content: Why Real Stories Win</h3>
+      <div class="post-subtitle">In today's crowded digital world, audiences are growing tired of overly polished, corporate-feeling content.</div>
+      
+      <div class="post-content">
+        <div class="post-section">
+          <h4>Why Authenticity Matters</h4>
+          <p>Humans are naturally drawn to other humans, not brands. Research shows that audiences are more likely to engage with content that feels real and relatable. According to a 2025 survey by Socialnomics, 78% of social media users say they are more likely to follow accounts that share personal stories, behind-the-scenes moments, and experiences that resonate emotionally.</p>
+          <p>Overly curated content can feel distant and even alienating. Users can spot when something is "staged" or insincere, which leads to lower engagement, less trust, and a weaker community connection. In contrast, authenticity builds credibility, fosters loyalty, and encourages active participation.</p>
+        </div>
+        
+        <div class="post-section">
+          <h4>Examples of Authentic Content That Resonates</h4>
+          <ul>
+            <li><strong>Influencers Sharing Real Struggles:</strong> Many influencers now openly discuss mental health, career challenges, or personal setbacks. By sharing vulnerability, they humanize themselves, creating strong emotional bonds with followers.</li>
+            <li><strong>Behind-the-Scenes Content:</strong> Whether it's showing how products are made or giving a glimpse into a creative process, behind-the-scenes content makes audiences feel like insiders.</li>
+            <li><strong>User-Generated Content (UGC):</strong> Encouraging followers to share their own experiences creates a community-centered environment.</li>
+            <li><strong>Transparent Brand Narratives:</strong> Brands that openly share their mission, failures, or even lessons learned resonate more than those presenting a flawless façade.</li>
+          </ul>
+        </div>
+        
+        <div class="post-section">
+          <h4>How to Create Human-Centric Content</h4>
+          <p>Creating content that feels authentic doesn't mean abandoning professionalism. It means balancing relatability with purpose. Here's how:</p>
+          <ul>
+            <li><strong>Tell Stories, Not Just Facts:</strong> Instead of just showcasing products or services, tell stories about how they impact real people.</li>
+            <li><strong>Be Consistent with Your Voice:</strong> Authenticity requires a consistent tone. Whether it's humorous, heartfelt, or educational, your voice should reflect your values.</li>
+            <li><strong>Engage Directly with Your Audience:</strong> Respond to comments, ask questions, and create polls or interactive content.</li>
+            <li><strong>Highlight Real People:</strong> Feature employees, customers, or community members rather than relying solely on models or stock imagery.</li>
+            <li><strong>Be Honest About Imperfections:</strong> Sharing failures, challenges, or lessons learned humanizes your brand.</li>
+          </ul>
+        </div>
+        
+        <div class="post-section">
+          <h4>Balancing Authenticity with Brand Goals</h4>
+          <p>While authenticity is crucial, it must align with your broader brand objectives. Being authentic doesn't mean ignoring marketing principles—it means presenting your brand's story in a genuine way.</p>
+          <ul>
+            <li><strong>Align Messaging with Values:</strong> Ensure that your authentic content reflects your brand's core values.</li>
+            <li><strong>Avoid Over-Performing:</strong> Over-editing or staging content reduces authenticity. Natural lighting, candid moments, and unscripted conversations often resonate better.</li>
+            <li><strong>Measure Engagement Beyond Likes:</strong> True success in authenticity is measured by comments, shares, and meaningful interactions—not just vanity metrics.</li>
+          </ul>
+        </div>
+        
+        <div class="post-section">
+          <h4>Trends Driving Human-Centric Social Media</h4>
+          <ul>
+            <li><strong>The Rise of Short-Form Video:</strong> Platforms like TikTok and Instagram Reels favor content that feels spontaneous and real.</li>
+            <li><strong>Increased Demand for Transparency:</strong> Consumers expect brands to be honest about sourcing, sustainability, and business practices.</li>
+            <li><strong>Micro-Influencers Over Celebrities:</strong> Audiences trust micro-influencers more because they feel like peers rather than unreachable celebrities.</li>
+            <li><strong>Community-Focused Platforms:</strong> Platforms emphasizing groups, discussions, or niche communities reward creators who actively build relationships.</li>
+          </ul>
+        </div>
+        
+        <div class="post-section">
+          <h4>Conclusion</h4>
+          <p>The era of inauthentic, overly curated social media content is fading. Audiences crave connection, honesty, and relatability. Brands and creators who embrace authenticity and human-centric storytelling not only build stronger engagement but also foster lasting trust and loyalty.</p>
+          <p>Authenticity isn't about perfection—it's about presenting a voice, a story, and a vision that resonates on a human level. By telling real stories, engaging directly with your audience, and highlighting genuine experiences, you can stand out in a crowded digital landscape and create a community that values your content long after a scroll ends.</p>
+        </div>
+      </div>
+      
+      <div class="actions">
+        <button onclick="likePost(this)">❤️ <span>0</span></button>
+        <button onclick="savePost()">🔖 Save</button>
+        <button onclick="sharePost(this)">📤 Share</button>
+      </div>
+
+      <div class="comments">
+        <div class="comment-input">
+          <input placeholder="Your name" class="cname">
+          <textarea placeholder="Write a comment"></textarea>
+          <button onclick="addComment(this)">Add Comment</button>
+        </div>
+        <ul class="comment-list"></ul>
+      </div>
+    </div>
+    
+    <!-- POST 3: Sustainable Future Living -->
+    <div class="post">
+      <h3>Sustainable Future Living: Practical and Actionable Steps for Everyday Life</h3>
+      <div class="post-subtitle">As the world faces climate change, resource depletion, and environmental challenges, sustainable living has moved from a niche lifestyle choice to a necessity.</div>
+      
+      <div class="post-content">
+        <div class="post-section">
+          <h4>Why Sustainable Living Matters</h4>
+          <p>The environmental challenges we face today are unprecedented. Global carbon emissions, deforestation, and ocean pollution are accelerating, impacting ecosystems and human communities alike. The United Nations reports that nearly 80% of people live in areas where air pollution exceeds safe limits, and millions of tons of plastic end up in oceans every year. By adopting sustainable practices, individuals can directly contribute to reducing their environmental footprint.</p>
+          <p>Beyond environmental impact, sustainable living has personal benefits:</p>
+          <ul>
+            <li><strong>Financial savings:</strong> Energy efficiency and minimalism often reduce monthly expenses.</li>
+            <li><strong>Health improvements:</strong> Plant-based diets, clean air, and reduced chemical exposure enhance overall wellness.</li>
+            <li><strong>Community impact:</strong> Local, eco-friendly practices support regional economies and foster social responsibility.</li>
+          </ul>
+        </div>
+        
+        <div class="post-section">
+          <h4>Energy Efficiency at Home</h4>
+          <p>Energy consumption is a major contributor to carbon emissions, making home energy efficiency a critical area for sustainable living.</p>
+          <ul>
+            <li><strong>Switch to renewable energy:</strong> Installing solar panels or choosing green energy providers can significantly reduce household carbon footprints.</li>
+            <li><strong>Upgrade to energy-efficient appliances:</strong> Look for Energy Star-rated refrigerators, washing machines, and HVAC systems.</li>
+            <li><strong>Smart home automation:</strong> Thermostats and lighting systems that adapt to your habits reduce unnecessary energy usage while increasing convenience.</li>
+          </ul>
+        </div>
+        
+        <div class="post-section">
+          <h4>Sustainable Diet and Food Practices</h4>
+          <p>Food choices play a major role in environmental sustainability. From production to transportation, the global food system contributes significantly to greenhouse gas emissions.</p>
+          <ul>
+            <li><strong>Adopt a plant-forward diet:</strong> Reducing meat and dairy consumption lowers carbon emissions.</li>
+            <li><strong>Choose local and seasonal produce:</strong> Local produce reduces transportation emissions and supports local farmers.</li>
+            <li><strong>Reduce food waste:</strong> Plan meals, use leftovers creatively, and compost food scraps to minimize waste.</li>
+          </ul>
+        </div>
+        
+        <div class="post-section">
+          <h4>Green Commuting and Transportation</h4>
+          <p>Transportation is another major contributor to carbon emissions. Sustainable commuting practices are not only environmentally friendly but also promote healthier lifestyles.</p>
+          <ul>
+            <li><strong>Use public transportation:</strong> Buses, trains, and subways reduce individual carbon footprints significantly compared to private vehicles.</li>
+            <li><strong>Bike or walk when possible:</strong> Short trips on foot or by bike lower emissions while improving physical health.</li>
+            <li><strong>Electric vehicles (EVs):</strong> For longer distances, EVs are increasingly accessible, efficient, and environmentally friendly.</li>
+          </ul>
+        </div>
+        
+        <div class="post-section">
+          <h4>Waste Reduction and Circular Living</h4>
+          <p>Waste management is a cornerstone of sustainable living. From plastics to textiles, adopting a circular approach to consumption can dramatically reduce environmental impact.</p>
+          <ul>
+            <li><strong>Recycle effectively:</strong> Follow local guidelines for paper, glass, plastics, and electronics.</li>
+            <li><strong>Composting:</strong> Food scraps, garden waste, and biodegradable materials can be composted to enrich soil instead of filling landfills.</li>
+            <li><strong>Minimalism and conscious purchasing:</strong> Prioritize quality over quantity. Reduce impulse buying, choose durable products, and embrace second-hand or refurbished items.</li>
+          </ul>
+        </div>
+        
+        <div class="post-section">
+          <h4>Conclusion</h4>
+          <p>Sustainable living is not about perfection—it's about consistent, actionable choices that collectively make a difference. From energy-efficient homes to plant-based diets, green commuting, and conscious consumption, each step contributes to a healthier planet and a more intentional lifestyle.</p>
+          <p>The future of our planet depends on the choices we make today. Sustainable living empowers individuals to take control, reduce environmental impact, and create a ripple effect that influences families, communities, and industries. Every mindful decision—from what you eat to how you travel—adds up. By embracing sustainability as a lifestyle rather than a one-time effort, you contribute to a cleaner, healthier, and more equitable world.</p>
+        </div>
+      </div>
+      
+      <div class="actions">
+        <button onclick="likePost(this)">❤️ <span>0</span></button>
+        <button onclick="savePost()">🔖 Save</button>
+        <button onclick="sharePost(this)">📤 Share</button>
+      </div>
+
+      <div class="comments">
+        <div class="comment-input">
+          <input placeholder="Your name" class="cname">
+          <textarea placeholder="Write a comment"></textarea>
+          <button onclick="addComment(this)">Add Comment</button>
+        </div>
+        <ul class="comment-list"></ul>
+      </div>
+    </div>
+    
+    <!-- POST 4: Mental Wellness 2.0 -->
+    <div class="post">
+      <h3>Mental Wellness 2.0: Digital Detoxing & Emotional Resilience</h3>
+      <div class="post-subtitle">In our hyper-connected world, mental wellness has become more important than ever. Smartphones, social media, and 24/7 connectivity provide convenience and entertainment but also contribute to stress, anxiety, and burnout.</div>
+      
+      <div class="post-content">
+        <div class="post-section">
+          <h4>The Digital Overload Problem</h4>
+          <p>Studies show that the average adult spends more than 7 hours a day on screens, with social media accounting for a significant portion of that time. Constant notifications, information overload, and the pressure to respond instantly create mental fatigue. This phenomenon, often referred to as "digital burnout," can lead to:</p>
+          <ul>
+            <li>Anxiety and stress</li>
+            <li>Sleep disturbances</li>
+            <li>Reduced attention span and productivity</li>
+            <li>Social comparison and decreased self-esteem</li>
+          </ul>
+          <p>Even for those actively pursuing wellness, excessive digital exposure can undermine mental health efforts.</p>
+        </div>
+        
+        <div class="post-section">
+          <h4>Digital Detoxing: Taking Control of Your Digital Life</h4>
+          <p>A digital detox is a deliberate break from screens, apps, or social media to reduce stress and regain mental clarity. Detoxing isn't about rejecting technology—it's about using it consciously.</p>
+          <p><strong>Practical Digital Detox Strategies:</strong></p>
+          <ul>
+            <li><strong>Set Boundaries:</strong> Establish "no-phone zones" in your home, like bedrooms or dining areas.</li>
+            <li><strong>Scheduled Detox Days:</strong> Try one day a week without social media or unnecessary screen time.</li>
+            <li><strong>Notifications Management:</strong> Disable non-essential notifications to prevent constant distractions.</li>
+            <li><strong>Use Technology Wisely:</strong> Apps that track screen time, block distracting websites, or remind you to take breaks can be valuable tools.</li>
+            <li><strong>Analog Alternatives:</strong> Replace digital activities with offline ones—journaling, sketching, cooking, or walking.</li>
+          </ul>
+          <p>Digital detoxing allows your brain to rest, reduces stress, and improves focus and sleep quality. Over time, it fosters a healthier relationship with technology.</p>
+        </div>
+        
+        <div class="post-section">
+          <h4>Emotional Resilience: The New Mental Fitness</h4>
+          <p>Emotional resilience is the ability to adapt to stress, adversity, and change while maintaining mental and emotional well-being. In the modern context, resilience isn't just reactive—it's proactive, building habits and mindsets that prepare individuals for life's challenges.</p>
+          <p><strong>Core Components of Emotional Resilience:</strong></p>
+          <ul>
+            <li><strong>Self-Awareness:</strong> Recognizing emotions, triggers, and patterns is foundational.</li>
+            <li><strong>Cognitive Flexibility:</strong> Being able to reframe challenges or setbacks in a positive or constructive light.</li>
+            <li><strong>Emotional Regulation:</strong> Techniques such as deep breathing, progressive muscle relaxation, or guided visualization.</li>
+            <li><strong>Social Support:</strong> Strong connections with friends, family, or communities act as buffers against stress.</li>
+            <li><strong>Purpose and Meaning:</strong> Focusing on long-term goals, personal values, and meaningful activities.</li>
+          </ul>
+        </div>
+        
+        <div class="post-section">
+          <h4>Integrating Digital Detox and Emotional Resilience</h4>
+          <p>These two approaches are complementary. Digital detoxing reduces external stressors and distractions, while emotional resilience strengthens internal coping mechanisms. Together, they create a robust mental wellness framework:</p>
+          <ul>
+            <li><strong>Morning Routine:</strong> Begin the day without checking your phone. Use this time for reflection, journaling, or light exercise.</li>
+            <li><strong>Mindful Breaks:</strong> Take short breaks during work to step away from screens and reset emotionally.</li>
+            <li><strong>Reflective Evening:</strong> End the day by reviewing emotions, noting wins, and planning mindful actions for the next day.</li>
+            <li><strong>Weekly Check-ins:</strong> Assess digital usage, identify stress patterns, and practice resilience exercises like gratitude journaling.</li>
+          </ul>
+        </div>
+        
+        <div class="post-section">
+          <h4>Conclusion</h4>
+          <p>Mental wellness in the 21st century requires more than traditional mindfulness or therapy—it demands conscious management of digital exposure and the development of emotional resilience. By practicing digital detoxing, individuals regain focus, reduce stress, and reclaim time for meaningful activities. Building emotional resilience equips people to navigate life's challenges with confidence and adaptability.</p>
+          <p>The combination of these strategies—reducing digital overload, creating healthy routines, and strengthening mental and emotional coping mechanisms—forms the foundation of Mental Wellness 2.0. In an era dominated by screens, notifications, and constant connectivity, taking control of your mental health is not just beneficial—it's essential.</p>
+        </div>
+      </div>
+      
+      <div class="actions">
+        <button onclick="likePost(this)">❤️ <span>0</span></button>
+        <button onclick="savePost()">🔖 Save</button>
+        <button onclick="sharePost(this)">📤 Share</button>
+      </div>
+
+      <div class="comments">
+        <div class="comment-input">
+          <input placeholder="Your name" class="cname">
+          <textarea placeholder="Write a comment"></textarea>
+          <button onclick="addComment(this)">Add Comment</button>
+        </div>
+        <ul class="comment-list"></ul>
+      </div>
+    </div>
+    
+    <!-- POST 5: Future of Work -->
+    <div class="post">
+      <h3>Future of Work & Digital Nomadism Post-2025: Adapting to a Flexible Career Landscape</h3>
+      <div class="post-subtitle">The concept of work is evolving at a rapid pace. Traditional 9-to-5 office jobs are increasingly being replaced by flexible arrangements, remote work, and location-independent careers.</div>
+      
+      <div class="post-content">
+        <div class="post-section">
+          <h4>The Shift Toward Remote and Hybrid Work</h4>
+          <p>Remote work, once considered a perk, has become a standard expectation for many industries. The COVID-19 pandemic accelerated this shift, proving that employees can be productive outside traditional office settings. Today, hybrid work models—where employees split time between home and office—are increasingly common.</p>
+          <p><strong>Key Drivers of Change:</strong></p>
+          <ul>
+            <li><strong>Technology Advancements:</strong> Cloud computing, collaboration tools like Slack and Zoom, and AI-driven project management systems make remote collaboration seamless.</li>
+            <li><strong>Employee Preferences:</strong> Surveys indicate that flexibility is now a top priority for job seekers.</li>
+            <li><strong>Global Talent Access:</strong> Companies can hire from anywhere in the world, creating diverse, distributed teams.</li>
+            <li><strong>Cost Efficiency:</strong> Remote and hybrid models reduce office space costs and commuting expenses.</li>
+          </ul>
+          <p>The post-2025 workplace will likely emphasize results over hours, promoting efficiency, creativity, and work-life balance.</p>
+        </div>
+        
+        <div class="post-section">
+          <h4>Digital Nomadism: Work Without Borders</h4>
+          <p>Digital nomads are professionals who leverage technology to work remotely while traveling or living in different locations. This lifestyle has surged in popularity due to greater connectivity, coworking spaces, and government programs offering long-term remote work visas.</p>
+          <p><strong>Becoming a Digital Nomad:</strong></p>
+          <ul>
+            <li><strong>Essential Skills:</strong> Strong self-discipline, time management, digital literacy, and effective communication are critical for remote success.</li>
+            <li><strong>Choosing Locations:</strong> Factors like cost of living, internet reliability, safety, and local culture influence nomad-friendly destinations.</li>
+            <li><strong>Workspace Solutions:</strong> Coworking spaces, coffee shops, and home offices provide flexible work environments.</li>
+            <li><strong>Community Building:</strong> Online networks, nomad forums, and local meetups help overcome isolation and foster collaboration.</li>
+          </ul>
+          <p>Digital nomadism isn't just a lifestyle—it's a movement reshaping global work culture, breaking down geographic barriers, and promoting a more flexible approach to careers.</p>
+        </div>
+        
+        <div class="post-section">
+          <h4>Future Trends in the Workplace</h4>
+          <p>Post-2025, several trends are likely to define the future of work:</p>
+          <ul>
+            <li><strong>Results-Oriented Work Environment (ROWE):</strong> Employers focus on outcomes rather than hours logged.</li>
+            <li><strong>AI-Augmented Roles:</strong> AI tools will complement human skills, from data analysis and content creation to customer service.</li>
+            <li><strong>Virtual Workspaces:</strong> AR, VR, and XR technology will create immersive, collaborative digital work environments.</li>
+            <li><strong>Global Talent Pools:</strong> Companies will hire from worldwide talent markets, creating culturally diverse teams.</li>
+            <li><strong>Mental Health Prioritization:</strong> Organizations will increasingly address employee well-being.</li>
+          </ul>
+          <p>These trends suggest that adaptability, continuous learning, and emotional intelligence will be as critical as technical skills for future success.</p>
+        </div>
+        
+        <div class="post-section">
+          <h4>Challenges and Solutions for Digital Nomads</h4>
+          <p>While digital nomadism offers freedom, it also comes with challenges:</p>
+          <ul>
+            <li><strong>Isolation and Loneliness:</strong> Frequent relocation can create social disconnect. <em>Solution:</em> Join coworking spaces, nomad communities, and local networking groups.</li>
+            <li><strong>Time Zone Management:</strong> Collaborating across multiple time zones can be complex. <em>Solution:</em> Schedule core overlap hours, use asynchronous communication tools.</li>
+            <li><strong>Legal and Tax Issues:</strong> Navigating visas, taxes, and insurance requires careful planning. <em>Solution:</em> Consult experts, leverage remote-work-friendly countries.</li>
+            <li><strong>Work-Life Boundaries:</strong> The blurring of work and travel can lead to burnout. <em>Solution:</em> Establish routines, dedicated workspaces, and time for relaxation.</li>
+          </ul>
+          <p>With preparation and strategy, these obstacles can be mitigated, allowing professionals to enjoy both productivity and adventure.</p>
+        </div>
+        
+        <div class="post-section">
+          <h4>Conclusion</h4>
+          <p>The future of work and digital nomadism post-2025 represents a seismic shift in how we approach careers, productivity, and lifestyle. Flexibility, technology, and global connectivity are replacing rigid office structures, creating opportunities for professionals to work from anywhere while maintaining high performance.</p>
+          <p>Digital nomadism exemplifies the blending of work and life, emphasizing freedom, exploration, and community. Meanwhile, companies that adapt to hybrid models, results-oriented cultures, and AI-assisted workflows will thrive in this evolving landscape.</p>
+          <p>For individuals, the keys to success are adaptability, continuous learning, and proactive planning. By embracing the opportunities offered by remote work and digital nomadism, professionals can design careers that align with personal goals, lifestyle aspirations, and the rapidly changing global economy.</p>
+          <p>In essence, post-2025 work is not just about employment—it's about creating a career that fits life, rather than fitting life into a career.</p>
+        </div>
+      </div>
+      
+      <div class="actions">
+        <button onclick="likePost(this)">❤️ <span>0</span></button>
+        <button onclick="savePost()">🔖 Save</button>
+        <button onclick="sharePost(this)">📤 Share</button>
+      </div>
+
+      <div class="comments">
+        <div class="comment-input">
+          <input placeholder="Your name" class="cname">
+          <textarea placeholder="Write a comment"></textarea>
+          <button onclick="addComment(this)">Add Comment</button>
+        </div>
+        <ul class="comment-list"></ul>
+      </div>
+    </div>
+
   </main>
 
   <aside class="sidebar">
     <h4>Why GlobalBlog?</h4>
-    <p>Fast, clean, responsive, and designed for worldwide creators.</p>
-    <h4>Topics</h4>
-    <p>#Technology<br>#Design<br>#Lifestyle<br>#Business</p>
+    <p>Fast, clean, responsive, and designed for worldwide creators. We explore how technology is transforming every aspect of our lives.</p>
+    
+    <h4>Featured Topics</h4>
+    <p>
+      #AI & Technology<br>
+      #Social Media<br>
+      #Sustainability<br>
+      #Mental Wellness<br>
+      #Future of Work<br>
+      #Digital Innovation
+    </p>
+    
+    <h4>Popular Posts</h4>
+    <p>
+      1. AI Beyond Basics<br>
+      2. Future of Work 2025+<br>
+      3. Sustainable Living Guide<br>
+      4. Digital Detox Strategies<br>
+      5. Authentic Social Media
+    </p>
+    
+    <h4>Join Our Community</h4>
+    <p>Subscribe to get weekly insights on how technology is changing our world, plus exclusive articles and resources.</p>
   </aside>
 </div>
 
 <footer>
-  © 2026 GlobalBlog • Designed for the world • <a href="privacy.html">Privacy Policy</a>
+  © 2026 GlobalBlog • Designed for the world • Exploring How Technology Is Changing Our Lives • <a href="privacy.html" style="color: var(--accent);">Privacy Policy</a>
 </footer>
 
 <!-- PRIVACY MODAL -->
@@ -362,34 +888,145 @@ if (localStorage.getItem("mode") === "true") {
 /* LIKE SYSTEM */
 function likePost(btn) {
   let span = btn.querySelector("span");
-  span.textContent = parseInt(span.textContent) + 1;
+  let currentLikes = parseInt(span.textContent);
+  span.textContent = currentLikes + 1;
+  
+  // Visual feedback
+  btn.style.transform = "scale(1.2)";
+  setTimeout(() => {
+    btn.style.transform = "scale(1)";
+  }, 200);
+  
+  // Store in localStorage
+  const postId = btn.closest('.post').querySelector('h3').textContent;
+  const likes = JSON.parse(localStorage.getItem('postLikes') || '{}');
+  likes[postId] = (likes[postId] || 0) + 1;
+  localStorage.setItem('postLikes', JSON.stringify(likes));
 }
+
+// Load saved likes on page load
+window.addEventListener('load', function() {
+  const likes = JSON.parse(localStorage.getItem('postLikes') || '{}');
+  document.querySelectorAll('.post').forEach(post => {
+    const title = post.querySelector('h3').textContent;
+    const likeBtn = post.querySelector('.actions button:first-child');
+    if (likeBtn && likes[title]) {
+      const span = likeBtn.querySelector('span');
+      span.textContent = likes[title];
+    }
+  });
+});
 
 /* SEARCH */
 function searchPosts(value) {
   document.querySelectorAll(".post").forEach(post => {
-    post.style.display = post.innerText.toLowerCase().includes(value.toLowerCase()) ? "block" : "none";
+    const title = post.querySelector("h3").textContent.toLowerCase();
+    const content = post.textContent.toLowerCase();
+    const searchTerm = value.toLowerCase();
+    
+    if (title.includes(searchTerm) || content.includes(searchTerm)) {
+      post.style.display = "block";
+      post.style.animation = "fadeUp 0.6s ease";
+    } else {
+      post.style.display = "none";
+    }
   });
 }
 
 /* COMMENTS */
 function addComment(btn) {
-  let post = btn.parentElement;
-  let name = post.querySelector(".cname").value.trim();
-  let text = post.querySelector("textarea").value.trim();
+  let post = btn.parentElement.parentElement;
+  let nameInput = post.querySelector(".cname");
+  let textInput = post.querySelector("textarea");
+  let name = nameInput.value.trim();
+  let text = textInput.value.trim();
+  
   if(name && text) {
+    let commentList = post.querySelector(".comment-list");
     let li = document.createElement("li");
-    li.textContent = `${name}: ${text}`;
-    post.querySelector("ul").appendChild(li);
-    post.querySelector("textarea").value = "";
+    
+    let authorDiv = document.createElement("div");
+    authorDiv.className = "comment-author";
+    authorDiv.textContent = name;
+    
+    let textDiv = document.createElement("div");
+    textDiv.className = "comment-text";
+    textDiv.textContent = text;
+    
+    li.appendChild(authorDiv);
+    li.appendChild(textDiv);
+    commentList.appendChild(li);
+    
+    // Clear inputs
+    nameInput.value = "";
+    textInput.value = "";
+    
+    // Store comment
+    saveComment(post.querySelector('h3').textContent, name, text);
   } else {
     alert("Please enter your name and comment.");
   }
 }
 
+function saveComment(postTitle, name, text) {
+  const comments = JSON.parse(localStorage.getItem('postComments') || '{}');
+  if (!comments[postTitle]) {
+    comments[postTitle] = [];
+  }
+  comments[postTitle].push({ name, text, date: new Date().toISOString() });
+  localStorage.setItem('postComments', JSON.stringify(comments));
+}
+
+// Load saved comments on page load
+window.addEventListener('load', function() {
+  const comments = JSON.parse(localStorage.getItem('postComments') || '{}');
+  document.querySelectorAll('.post').forEach(post => {
+    const title = post.querySelector('h3').textContent;
+    const commentList = post.querySelector('.comment-list');
+    
+    if (comments[title] && commentList) {
+      comments[title].forEach(comment => {
+        let li = document.createElement("li");
+        
+        let authorDiv = document.createElement("div");
+        authorDiv.className = "comment-author";
+        authorDiv.textContent = comment.name;
+        
+        let textDiv = document.createElement("div");
+        textDiv.className = "comment-text";
+        textDiv.textContent = comment.text;
+        
+        li.appendChild(authorDiv);
+        li.appendChild(textDiv);
+        commentList.appendChild(li);
+      });
+    }
+  });
+});
+
 /* SAVE POST */
 function savePost() {
-  alert("Post saved! (Local feature demo)");
+  alert("Post saved to your reading list!");
+  // In a real implementation, this would save to localStorage or send to a backend
+}
+
+/* SHARE POST */
+function sharePost(btn) {
+  const post = btn.closest('.post');
+  const title = post.querySelector('h3').textContent;
+  const url = window.location.href;
+  
+  if (navigator.share) {
+    navigator.share({
+      title: title,
+      text: 'Check out this article from GlobalBlog:',
+      url: url
+    });
+  } else {
+    // Fallback for browsers that don't support Web Share API
+    const shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(url)}`;
+    window.open(shareUrl, '_blank');
+  }
 }
 
 /* COOKIE CONSENT LOGIC */
@@ -436,3 +1073,4 @@ window.onload = () => {
 
 </body>
 </html>
+```
